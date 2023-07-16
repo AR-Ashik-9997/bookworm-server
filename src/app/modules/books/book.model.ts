@@ -6,7 +6,12 @@ const BooksSchema = new Schema<IBook, BookModel>(
     title: { type: String, required: true },
     author: { type: String, required: true },
     genre: { type: String, required: true },
-    publicationYear: { type: Number,required: true},    
+    publicationDate: { type: Date,required: true},
+    user: {
+      type: Schema.Types.ObjectId,
+      ref: 'User',
+      required: true,
+    },    
   },
   {
     timestamps: true,

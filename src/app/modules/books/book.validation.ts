@@ -5,8 +5,8 @@ const createBookzodValidationSchema = z.object({
     title: z.string({ required_error: 'Title is required' }),
     author: z.string({ required_error: 'Author is required' }),
     genre: z.string({ required_error: 'Genres is required' }),
-    publicationYear: z.number({
-      required_error: 'Publication year is required',
+    publicationDate: z.string({
+      required_error: 'Publication date is required',
     }),
   }),
 });
