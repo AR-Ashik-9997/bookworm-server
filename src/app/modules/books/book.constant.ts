@@ -1,6 +1,6 @@
 export const BookSearchableFields = [
   'id',
-  'title ',
+  'title',
   'author',
   'genre',
   'publicationDate',
