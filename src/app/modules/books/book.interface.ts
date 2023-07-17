@@ -5,7 +5,10 @@ export type IBook = {
   title: string;
   author: string;
   genre: string;
-  publicationDate: Date;
+  publicationDate: string;
+  publicationYear: string;
   user: Types.ObjectId | IUser;
 };
 export type BookModel = Model<IBook, Record<string, unknown>>;
+
+export type IBookSearch = { searchTerm?: string };

@@ -4,6 +4,7 @@ import { IBook } from './book.interface';
 import catchAsync from '../../../shared/catchAsync';
 import { Request, Response } from 'express';
 import { BookService } from './book.service';
+import pick from '../../../shared/pickPagination';
 
 const createBook = catchAsync(async (req: Request, res: Response) => {
   const { ...bookData } = req.body;
@@ -17,12 +18,13 @@ const createBook = catchAsync(async (req: Request, res: Response) => {
 });
 
 const getAllBooks = catchAsync(async (req: Request, res: Response) => {
-  const result = await BookService.getAllBooks();
+  const filters = pick(req.query, ['searchTerm']);
+  const result = await BookService.getAllBooks(filters);
   sendResponse<IBook[]>(res, {
     statusCode: httpStatus.OK,
     success: true,
     message: 'Books retrieved successfully',
-    data:result,
+    data: result,
   });
 });
 const getSingleBook = catchAsync(async (req: Request, res: Response) => {
