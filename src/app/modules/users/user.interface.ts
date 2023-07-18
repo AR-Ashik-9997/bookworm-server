@@ -2,9 +2,10 @@
 import { Model } from 'mongoose';
 
 export type IUser = {
+  username: string;
   email: string;
   password: string;
-  role:"user";
+  role: string;
 };
 
 export type IUserLoginMethod = {

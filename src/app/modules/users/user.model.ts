@@ -2,14 +2,16 @@
 import { Schema, model } from 'mongoose';
 import { IUser, IUserLoginMethod, UserModel } from './user.interface';
 import ApiError from '../../../eroors/apiErrorHandler';
-import httpStatus from "http-status";
+import httpStatus from 'http-status';
 import bcrypt from 'bcrypt';
 import config from '../../../config';
 
 const userSchema = new Schema<IUser, Record<string, never>, IUserLoginMethod>(
   {
+    username: { type: String, required: true },
     email: { type: String, required: true, unique: true },
-    password: { type: String, required: true },    
+    password: { type: String, required: true },
+    role: { type: String },
   },
   {
     timestamps: true,
