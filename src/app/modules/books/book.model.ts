@@ -8,7 +8,8 @@ const BooksSchema = new Schema<IBook, BookModel>(
     genre: { type: String, required: true },
     publicationDate: { type: String, required: true },
     publicationYear: { type: String },
-    role: { type: String, default:"owner"},
+    role: { type: String, default: 'owner' },
+    reviews: [{ type: String }],
     user: {
       type: Schema.Types.ObjectId,
       ref: 'User',
