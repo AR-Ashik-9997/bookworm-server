@@ -11,7 +11,7 @@ const userSchema = new Schema<IUser, Record<string, never>, IUserLoginMethod>(
     username: { type: String, required: true },
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true },
-    role: { type: String },
+    role: { type: String },    
   },
   {
     timestamps: true,
@@ -37,7 +37,10 @@ userSchema.pre('save', async function (next) {
 userSchema.methods.isExistEmail = async function (
   email: string
 ): Promise<Partial<IUser> | null> {
-  return await User.findOne({ email }, { role: 1, password: 1 }).lean();
+  return await User.findOne(
+    { email },
+    { role: 1, password: 1, email:1 }
+  ).lean();
 };
 userSchema.set('toJSON', {
   transform: function (doc, ret) {

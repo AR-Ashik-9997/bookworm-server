@@ -8,6 +8,7 @@ export type IBook = {
   publicationDate: string;
   publicationYear: string;
   user: Types.ObjectId | IUser;
+  role: string;
 };
 export type BookModel = Model<IBook, Record<string, unknown>>;
 

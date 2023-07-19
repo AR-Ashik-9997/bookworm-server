@@ -34,18 +34,18 @@ const LoginUser = async (payload: ILoginUser): Promise<IUserLoginResponse> => {
   const { _id } = (await User.findOne({ email: email }, { _id: 1 }).lean()) as {
     _id: string;
   };
-  const { role } = isExistUser;
+  const { role, email: useremail } = isExistUser;
   const accessToken = jwtHelper.createToken(
-    { _id, role },
+    { _id, role, useremail },
     config.jwt.secret as Secret,
     config.jwt.expires_in as string
   );
   const refreshToken = jwtHelper.createToken(
-    { _id, role },
+    { _id, role, useremail },
     config.jwt.refresh_secret as Secret,
     config.jwt.refresh_expires_in as string
   );
-  return { accessToken, refreshToken };
+  return { accessToken, refreshToken,userId:_id}; 
 };
 
 const RefreshToken = async (token: string): Promise<IRefreshTokenResponse> => {
@@ -74,4 +74,8 @@ const RefreshToken = async (token: string): Promise<IRefreshTokenResponse> => {
   return { accessToken: newAccessToken };
 };
 
-export const authService = { createUser, LoginUser, RefreshToken };
+export const authService = {
+  createUser,
+  LoginUser,
+  RefreshToken, 
+};
